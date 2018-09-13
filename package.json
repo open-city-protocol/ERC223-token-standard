@@ -1,0 +1,38 @@
+{
+  "name": "@open-city-protocol/erc223",
+  "version": "1.0.0-rc.4",
+  "description": "ERC223 token standard",
+  "scripts": {
+    "install:truffle": "truffle install",
+    "compile": "truffle compile",
+    "publish:truffle": "truffle publish",
+    "prepublishOnly": "node scripts/version.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/open-city-protocol/ERC223-token-standard.git"
+  },
+  "keywords": [
+    "solidity",
+    "ethereum",
+    "smart",
+    "contracts",
+    "tokens",
+    "ERC",
+    "EIP",
+    "EIP-223",
+    "ERC-223"
+  ],
+  "authors": [],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/open-city-protocol/ERC223-token-standard/issues"
+  },
+  "homepage": "https://github.com/open-city-protocol/ERC223-token-standard/#readme",
+  "devDependencies": {
+    "ethpm": "0.0.16",
+    "ethpm-registry": "0.0.10",
+    "truffle": "4.1.14",
+    "truffle-hdwallet-provider": "0.0.6"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "package_name": "erc223",
+  "version": "1.0.0-rc.4",
+  "description": "ERC223 token standard",
+  "authors": [],
+  "keywords": [
+    "solidity",
+    "ethereum",
+    "smart",
+    "contracts",
+    "tokens",
+    "ERC",
+    "EIP",
+    "EIP-223",
+    "ERC-223"
+  ],
+  "dependencies": {},
+  "license": "MIT"
+}

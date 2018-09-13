@@ -1,0 +1,9 @@
+.DS_Store
+*.swp
+*.swo
+
+build
+node_modules
+installed_contracts
+
+secrets.json

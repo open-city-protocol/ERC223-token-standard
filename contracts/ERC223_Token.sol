@@ -1,4 +1,4 @@
-pragma solidity ^0.4.9;
+pragma solidity ^0.4.24;
 
 import "./Receiver_Interface.sol";
 import "./ERC223_Interface.sol";
@@ -8,8 +8,8 @@ import "./ERC223_Interface.sol";
  *
  * https://github.com/Dexaran/ERC223-token-standard
  */
- 
- 
+
+
  /* https://github.com/LykkeCity/EthereumApiDotNetCore/blob/master/src/ContractBuilder/contracts/token/SafeMath.sol */
 contract SafeMath {
     uint256 constant public MAX_UINT256 =
@@ -31,17 +31,17 @@ contract SafeMath {
         return x * y;
     }
 }
- 
+
 contract ERC223Token is ERC223, SafeMath {
 
   mapping(address => uint) balances;
-  
+
   string public name;
   string public symbol;
   uint8 public decimals;
   uint256 public totalSupply;
-  
-  
+
+
   // Function to access name of token .
   function name() public view returns (string _name) {
       return name;
@@ -58,16 +58,16 @@ contract ERC223Token is ERC223, SafeMath {
   function totalSupply() public view returns (uint256 _totalSupply) {
       return totalSupply;
   }
-  
-  
+
+
   // Function that is called when a user or another contract wants to transfer funds .
   function transfer(address _to, uint _value, bytes _data, string _custom_fallback) public returns (bool success) {
-      
+
     if(isContract(_to)) {
         if (balanceOf(msg.sender) < _value) revert();
         balances[msg.sender] = safeSub(balanceOf(msg.sender), _value);
         balances[_to] = safeAdd(balanceOf(_to), _value);
-        assert(_to.call.value(0)(bytes4(keccak256(_custom_fallback)), msg.sender, _value, _data));
+        assert(_to.call.value(0)(bytes4(keccak256(abi.encodePacked(_custom_fallback))), msg.sender, _value, _data));
         emit Transfer(msg.sender, _to, _value, _data);
         return true;
     }
@@ -75,11 +75,11 @@ contract ERC223Token is ERC223, SafeMath {
         return transferToAddress(_to, _value, _data);
     }
 }
-  
+
 
   // Function that is called when a user or another contract wants to transfer funds .
   function transfer(address _to, uint _value, bytes _data) public returns (bool success) {
-      
+
     if(isContract(_to)) {
         return transferToContract(_to, _value, _data);
     }
@@ -87,11 +87,11 @@ contract ERC223Token is ERC223, SafeMath {
         return transferToAddress(_to, _value, _data);
     }
 }
-  
+
   // Standard function transfer similar to ERC20 transfer with no _data .
   // Added due to backwards compatibility reasons .
   function transfer(address _to, uint _value) public returns (bool success) {
-      
+
     //standard function transfer similar to ERC20 transfer with no _data
     //added due to backwards compatibility reasons
     bytes memory empty;
@@ -121,7 +121,7 @@ contract ERC223Token is ERC223, SafeMath {
     emit Transfer(msg.sender, _to, _value, _data);
     return true;
   }
-  
+
   //function that is called when transaction target is a contract
   function transferToContract(address _to, uint _value, bytes _data) private returns (bool success) {
     if (balanceOf(msg.sender) < _value) revert();
