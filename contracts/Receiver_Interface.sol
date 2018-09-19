@@ -14,7 +14,7 @@ pragma solidity ^0.4.9;
     }
 
 
-    function tokenFallback(address _from, uint256 _value, bytes _data) public pure {
+    function tokenFallback(address _from, uint256 _value, bytes _data) public {
       TKN memory tkn;
       tkn.sender = _from;
       tkn.value = _value;
