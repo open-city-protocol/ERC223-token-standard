@@ -13,7 +13,7 @@ pragma solidity ^0.4.9;
         bytes4 sig;
     }
 
-
+    // solhint-disable-next-line
     function tokenFallback(address _from, uint256 _value, bytes _data) public {
       TKN memory tkn;
       tkn.sender = _from;
