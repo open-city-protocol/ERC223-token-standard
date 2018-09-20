@@ -1,0 +1,14 @@
+{
+   "extends": "default",
+   "rules": {
+     "avoid-throw": false,
+     "avoid-suicide": "error",
+     "avoid-sha3": "warn",
+     "compiler-fixed": false,
+     "compiler-gt-0_4": true,
+     "indent": ["warn", 2],
+     "max-line-length": 150,
+     "var-name-mixedcase": false,
+     "func-param-name-mixedcase": false
+   }
+ }
