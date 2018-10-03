@@ -11,7 +11,7 @@ import "./ERC223_Interface.sol";
 
 
  /* https://github.com/LykkeCity/EthereumApiDotNetCore/blob/master/src/ContractBuilder/contracts/token/SafeMath.sol */
-contract SafeMath {
+contract SafeMathERC223 {
     uint256 constant public MAX_UINT256 =
     0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF;
 
@@ -32,7 +32,7 @@ contract SafeMath {
     }
 }
 
-contract ERC223Token is ERC223, SafeMath {
+contract ERC223Token is ERC223, SafeMathERC223 {
 
   mapping(address => uint) balances;
 
