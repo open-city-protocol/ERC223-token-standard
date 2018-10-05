@@ -63,24 +63,18 @@ contract ERC223Token is ERC223, SafeMathERC223 {
   // Function that is called when a user or another contract wants to transfer funds .
   function transfer(address _to, uint _value, bytes _data, string _custom_fallback) public returns (bool success) {
     if (isContract(_to)) {
-      if (balanceOf(msg.sender) < _value) revert();
-      balances[msg.sender] = safeSub(balanceOf(msg.sender), _value);
-      balances[_to] = safeAdd(balanceOf(_to), _value);
-      // solhint-disable-next-line
-      assert(_to.call.value(0)(abi.encodeWithSignature(_custom_fallback, msg.sender, _value, _data)));
-      emit Transfer(msg.sender, _to, _value, _data);
-      return true;
+      return transferToContractCustom(msg.sender, _to, _value, _data, _custom_fallback);
     } else {
-      return transferToAddress(_to, _value, _data);
+      return transferToAddress(msg.sender, _to, _value, _data);
     }
   }
 
   // Function that is called when a user or another contract wants to transfer funds .
   function transfer(address _to, uint _value, bytes _data) public returns (bool success) {
     if (isContract(_to)) {
-      return transferToContract(_to, _value, _data);
+      return transferToContract(msg.sender, _to, _value, _data);
     } else {
-      return transferToAddress(_to, _value, _data);
+      return transferToAddress(msg.sender, _to, _value, _data);
     }
   }
 
@@ -91,9 +85,9 @@ contract ERC223Token is ERC223, SafeMathERC223 {
     //added due to backwards compatibility reasons
     bytes memory empty;
     if (isContract(_to)) {
-      return transferToContract(_to, _value, empty);
+      return transferToContract(msg.sender, _to, _value, empty);
     } else {
-      return transferToAddress(_to, _value, empty);
+      return transferToAddress(msg.sender, _to, _value, empty);
     }
   }
 
@@ -102,7 +96,7 @@ contract ERC223Token is ERC223, SafeMathERC223 {
   }
 
   //assemble the given address bytecode. If bytecode exists then the _addr is a contract.
-  function isContract(address _addr) private view returns (bool is_contract) {
+  function isContract(address _addr) internal view returns (bool is_contract) {
     uint length;
     assembly { // solhint-disable-line
           //retrieve the size of the code on target address, this needs assembly
@@ -112,22 +106,33 @@ contract ERC223Token is ERC223, SafeMathERC223 {
   }
 
   //function that is called when transaction target is an address
-  function transferToAddress(address _to, uint _value, bytes _data) private returns (bool success) {
-    if (balanceOf(msg.sender) < _value) revert();
-    balances[msg.sender] = safeSub(balanceOf(msg.sender), _value);
+  function transferToAddress(address _from, address _to, uint _value, bytes _data) internal returns (bool success) {
+    if (balanceOf(_from) < _value) revert();
+    balances[_from] = safeSub(balanceOf(_from), _value);
     balances[_to] = safeAdd(balanceOf(_to), _value);
-    emit Transfer(msg.sender, _to, _value, _data);
+    emit Transfer(_from, _to, _value, _data);
     return true;
   }
 
   //function that is called when transaction target is a contract
-  function transferToContract(address _to, uint _value, bytes _data) private returns (bool success) {
-    if (balanceOf(msg.sender) < _value) revert();
-    balances[msg.sender] = safeSub(balanceOf(msg.sender), _value);
+  function transferToContract(address _from, address _to, uint _value, bytes _data) internal returns (bool success) {
+    if (balanceOf(_from) < _value) revert();
+    balances[_from] = safeSub(balanceOf(_from), _value);
     balances[_to] = safeAdd(balanceOf(_to), _value);
     ContractReceiver receiver = ContractReceiver(_to);
-    receiver.tokenFallback(msg.sender, _value, _data);
-    emit Transfer(msg.sender, _to, _value, _data);
+    receiver.tokenFallback(_from, _value, _data);
+    emit Transfer(_from, _to, _value, _data);
+    return true;
+  }
+
+  //function that is called when transaction target is a contract
+  function transferToContractCustom(address _from, address _to, uint _value, bytes _data, string _custom_fallback) internal returns (bool success) {
+    if (balanceOf(_from) < _value) revert();
+    balances[_from] = safeSub(balanceOf(_from), _value);
+    balances[_to] = safeAdd(balanceOf(_to), _value);
+    // solhint-disable-next-line
+    assert(_to.call.value(0)(abi.encodeWithSignature(_custom_fallback, _from, _value, _data)));
+    emit Transfer(_from, _to, _value, _data);
     return true;
   }
 }
