@@ -18,7 +18,7 @@ if (fs.existsSync('secrets.json')) {
 module.exports = {
   networks: {
     ropsten: {
-      provider: new HDWalletProvider(mnemonic, 'https://ropsten.infura.io'),
+      provider: new HDWalletProvider(mnemonic, 'https://ropsten.infura.io/v3/8c816c5a208b491980a0d4f0b16ca944'),
       network_id: '3',
     },
   },
