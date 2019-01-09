@@ -11,7 +11,8 @@
     "pretest": "npm run lint",
     "test": "scripts/test.sh --network=test",
     "publish:truffle": "truffle publish",
-    "prepublishOnly": "node scripts/version.js"
+    "prepublishOnly": "node scripts/version.js",
+    "version": "node scripts/version.js"
   },
   "repository": {
     "type": "git",
