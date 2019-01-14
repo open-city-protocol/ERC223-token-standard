@@ -39,9 +39,9 @@ start_ganache() {
   )
 
   if [ "$SOLIDITY_COVERAGE" = true ]; then
-    node_modules/.bin/testrpc-sc --gasLimit 0xfffffffffff --port "$ganache_port" "${accounts[@]}" > /dev/null &
+    npx testrpc-sc --gasLimit 0xfffffffffff --port "$ganache_port" "${accounts[@]}" > /dev/null &
   else
-    node_modules/.bin/ganache-cli --gasLimit 0xfffffffffff "${accounts[@]}" > /dev/null &
+    npx ganache-cli --gasLimit 0xfffffffffff "${accounts[@]}" > /dev/null &
   fi
 
   ganache_pid=$!
@@ -60,11 +60,11 @@ if [ "$SOLC_NIGHTLY" = true ]; then
 fi
 
 if [ "$SOLIDITY_COVERAGE" = true ]; then
-  node_modules/.bin/solidity-coverage
+  npx solidity-coverage
 
   if [ "$CONTINUOUS_INTEGRATION" = true ]; then
-    cat coverage/lcov.info | node_modules/.bin/coveralls
+    cat coverage/lcov.info | npx coveralls
   fi
 else
-  node_modules/.bin/truffle test "$@"
+  npx truffle test "$@"
 fi

@@ -1,6 +1,14 @@
 {
   "name": "@open-city-protocol/erc223",
-  "version": "1.0.0-rc.8",
+  "publishConfig": {
+    "tag": "alpha",
+    "access": "restricted"
+  },
+  "release": {
+    "branch": "master",
+    "tagFormat": "v${version}-alpha"
+  },
+  "version": "0.0.0-alpha",
   "description": "ERC223 token standard",
   "scripts": {
     "install:truffle": "truffle install",
@@ -11,7 +19,8 @@
     "pretest": "npm run lint",
     "test": "scripts/test.sh --network=test",
     "publish:truffle": "truffle publish",
-    "prepublishOnly": "node scripts/version.js"
+    "prepublishOnly": "node scripts/version.js",
+    "version": "node scripts/version.js"
   },
   "repository": {
     "type": "git",
@@ -35,9 +44,10 @@
   },
   "homepage": "https://github.com/open-city-protocol/ERC223-token-standard/#readme",
   "devDependencies": {
-    "chai": "^4.1.2",
+    "bignumber.js": "^8.0.2",
+    "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
-    "chai-bignumber": "^2.0.2",
+    "chai-bignumber": "^3.0.0",
     "eslint": "^4.13.1",
     "eslint-config-airbnb": "16.1.0",
     "eslint-plugin-import": "2.8.0",
@@ -45,13 +55,16 @@
     "eslint-plugin-mocha": "4.11.0",
     "eslint-plugin-node": "5.1.0",
     "eslint-plugin-react": "7.5.1",
+    "ethereumjs-abi": "^0.6.5",
     "ethpm": "0.0.16",
     "ethpm-registry": "0.0.10",
-    "ganache-cli": "^6.1.8",
+    "ganache-cli": "^6.2.5",
+    "scrypt": "^6.0.3",
     "solhint": "1.2.1",
     "solidity-coverage": "^0.5.11",
     "truffle": "4.1.14",
     "truffle-hdwallet-provider": "0.0.6",
-    "web3": "1.0.0-beta.36"
+    "web3": "1.0.0-beta.37",
+    "websocket": "^1.0.28"
   }
 }
