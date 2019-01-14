@@ -1,6 +1,14 @@
 {
   "name": "@open-city-protocol/erc223",
-  "version": "3.3.10-alpha.11",
+  "publishConfig": {
+    "tag": "alpha",
+    "access": "restricted"
+  },
+  "release": {
+    "branch": "master",
+    "tagFormat": "v${version}-alpha"
+  },
+  "version": "0.0.0-alpha",
   "description": "ERC223 token standard",
   "scripts": {
     "install:truffle": "truffle install",
@@ -36,6 +44,7 @@
   },
   "homepage": "https://github.com/open-city-protocol/ERC223-token-standard/#readme",
   "devDependencies": {
+    "bignumber.js": "^8.0.2",
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
     "chai-bignumber": "^2.0.2",
@@ -46,6 +55,7 @@
     "eslint-plugin-mocha": "4.11.0",
     "eslint-plugin-node": "5.1.0",
     "eslint-plugin-react": "7.5.1",
+    "ethereumjs-abi": "^0.6.5",
     "ethpm": "0.0.16",
     "ethpm-registry": "0.0.10",
     "ganache-cli": "^6.1.8",

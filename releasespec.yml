@@ -1,0 +1,26 @@
+version: 0.2
+
+env:
+  parameter-store:
+    NPM_TOKEN: "npm_access_token"
+    GH_TOKEN: "gh_token"
+
+phases:
+  install:
+    commands:
+      - echo Update npm registry
+      - echo //registry.npmjs.org/:_authToken=$NPM_TOKEN >> .npmrc
+      - git checkout master
+  pre_build:
+    commands:
+      - echo Installing source NPM dependencies...
+      - npm install
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Compiling the Node.js code
+      # - npm test
+  post_build:
+    commands:
+      - npx semantic-release
+      - echo Build completed on `date`
