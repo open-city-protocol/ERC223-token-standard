@@ -60,6 +60,7 @@
     "ethpm-registry": "0.0.10",
     "ganache-cli": "^6.2.5",
     "scrypt": "^6.0.3",
+    "semantic-release": "^15.13.3",
     "solhint": "1.2.1",
     "solidity-coverage": "^0.5.11",
     "truffle": "4.1.14",
