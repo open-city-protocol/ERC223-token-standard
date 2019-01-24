@@ -4,7 +4,6 @@ env:
   parameter-store:
     NPM_TOKEN: "npm_access_token"
     GH_TOKEN: "gh_token"
-    SSH_KEY: "submodule_ssh_key"
 
 phases:
   install:
@@ -16,12 +15,6 @@ phases:
     commands:
       - echo Installing source NPM dependencies...
       - npm install
-  build:
-    commands:
-      - echo Build started on `date`
-      - echo Compiling the Node.js code
-      # - npm test
   post_build:
     commands:
       - npx semantic-release
-      - echo Build completed on `date`
