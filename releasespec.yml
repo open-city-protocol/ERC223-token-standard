@@ -3,6 +3,7 @@ version: 0.2
 env:
   parameter-store:
     NPM_TOKEN: "npm_access_token"
+    GH_TOKEN: "gh_token"
     SSH_KEY: "submodule_ssh_key"
 
 phases:
@@ -10,11 +11,6 @@ phases:
     commands:
       - echo Update npm registry
       - echo //registry.npmjs.org/:_authToken=$NPM_TOKEN >> .npmrc
-      - echo Update ssh key
-      - echo "$SSH_KEY" | tr -d '\r' > $HOME/.ssh/id_rsa
-      - chmod 600 $HOME/.ssh/id_rsa
-      - eval "$(ssh-agent -s)"
-      - ssh-add $HOME/.ssh/id_rsa
       - git checkout master
   pre_build:
     commands:
