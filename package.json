@@ -6,7 +6,8 @@
   },
   "release": {
     "branch": "master",
-    "tagFormat": "v${version}-alpha"
+    "tagFormat": "v${version}-alpha",
+    "repositoryUrl": "git@github.com:open-city-protocol/ERC223-token-standard.git"
   },
   "description": "ERC223 token standard",
   "scripts": {
