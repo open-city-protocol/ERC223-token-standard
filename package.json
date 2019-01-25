@@ -11,7 +11,7 @@
   },
   "description": "ERC223 token standard",
   "scripts": {
-    "install:truffle": "truffle install",
+    "postinstall": "truffle install",
     "compile": "truffle compile",
     "lint:js": "eslint 'test/**' 'migrations/**' 'lib/**' 'scripts/**/*.js'",
     "lint:sol": "solhint 'contracts/**/*.sol'",
